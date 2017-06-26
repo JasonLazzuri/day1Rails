@@ -1,0 +1,32 @@
+<h1><%= @category.name %></h1>
+
+<% if @category.businesses.any? %>
+  <h3>Here are the businesses in this category:</h3>
+
+  <ul>
+    <% @category.businesses.each do |business| %>
+    <li>
+      <%= business.name %> | <%= business.phone %>, <%= business.address %> |
+      <%= link_to 'Edit', edit_category_business_path(@category, business) %> |
+      <%= link_to 'Delete', category_business_path(@category, business), :data => {
+        :confirm => 'Are you sure?', :method => 'delete'
+      } %>
+    </li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p>
+    No businesses in this category.
+  </p>
+<% end %>
+
+<p><%= link_to 'Add a business', new_category_business_path(@category) %></p>
+
+<p><%= link_to 'Return to All Categories', categories_path %></p>
+
+<p><%= link_to 'Edit Category', edit_category_path(@category) %></p>
+<p><%= link_to 'Delete Category', category_path(@category), :data => {
+  :confirm => 'Are you sure?',
+  :method => 'Delete'
+  } %></p>
